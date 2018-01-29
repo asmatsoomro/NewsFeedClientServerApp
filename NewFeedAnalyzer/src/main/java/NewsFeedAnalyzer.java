@@ -14,13 +14,12 @@ public class NewsFeedAnalyzer {
         try {
 
             int port = 25000;
-            ServerSocket serverSocket = new ServerSocket(port);
+            ServerSocket serverSocket = new ServerSocket(port, 100);
             System.out.println("Server Started and listening to the port 25000");
             socket = serverSocket.accept();
             InputStream is = socket.getInputStream();
             ObjectInputStream objectInputStream = new ObjectInputStream(is);
             InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
 
             int goodNewsCount = 0;
             long timeAftertenSecs = System.currentTimeMillis() + 10000;
@@ -34,7 +33,6 @@ public class NewsFeedAnalyzer {
                         boolean isAGoodNews = isGoodNews(news.getHeadline());
 
                         if (isAGoodNews) {
-                            System.out.println("Message received from client is " + news.getHeadline());
                             goodNewsCount++;
                             topHeadlines = topHeadlines(news, topHeadlines);
                             if (timeAftertenSecs < System.currentTimeMillis()) {
@@ -48,7 +46,6 @@ public class NewsFeedAnalyzer {
                 } catch (EOFException eofException) {
                     break;
                 }
-                //  }
             }
         } catch (Exception e) {
             e.printStackTrace();

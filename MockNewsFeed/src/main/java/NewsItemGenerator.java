@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -17,10 +16,8 @@ public class NewsItemGenerator {
         String headline = "";
         Random randomWordPicker = new Random();
 
-        Random priorityRandom = new Random();
-        int lowerbound = 1;
-        int upperbound = 10;
-        int priority = priorityRandom.nextInt(upperbound-lowerbound) + lowerbound;
+       DistributedRandomNumberGenerator distributedRandomNumberGenerator = new DistributedRandomNumberGenerator();
+       addDistributions(distributedRandomNumberGenerator);
 
         for (int i=0; i< result; i++){
             int num = randomWordPicker.nextInt(headlineKeywords.size());
@@ -31,6 +28,19 @@ public class NewsItemGenerator {
             else
             headline += headlineKeywords.get(num) + " ";
         }
-        return new NewsItem(headline , priorityRandom.nextInt(priority));
+        return new NewsItem(headline , distributedRandomNumberGenerator.getDistributedRandomNumber());
+    }
+
+    private static void addDistributions(DistributedRandomNumberGenerator distributedRandomNumberGenerator){
+        distributedRandomNumberGenerator.addNumber(0, 29.3d);
+        distributedRandomNumberGenerator.addNumber(1, 19.3d);
+        distributedRandomNumberGenerator.addNumber(2, 14.3d);
+        distributedRandomNumberGenerator.addNumber(3, 10.9d);
+        distributedRandomNumberGenerator.addNumber(4, 8.4d);
+        distributedRandomNumberGenerator.addNumber(5, 6.5d);
+        distributedRandomNumberGenerator.addNumber(6, 4.8d);
+        distributedRandomNumberGenerator.addNumber(7, 3.4d);
+        distributedRandomNumberGenerator.addNumber(8, 2.1d);
+        distributedRandomNumberGenerator.addNumber(9, 1d);
     }
 }

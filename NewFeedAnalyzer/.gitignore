@@ -1,5 +1,6 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+*.class
 
 ### STS ###
 .apt_generated
@@ -20,6 +21,7 @@ mvnw.cmd
 resources
 *.iml
 target
+
 
 ### NetBeans ###
 nbproject/private/
